@@ -4,18 +4,19 @@
 #
 Name     : R-futile.options
 Version  : 1.0.1
-Release  : 21
+Release  : 22
 URL      : https://cran.r-project.org/src/contrib/futile.options_1.0.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/futile.options_1.0.1.tar.gz
 Summary  : Futile Options Management
 Group    : Development/Tools
 License  : LGPL-3.0
 BuildRequires : buildreq-R
+BuildRequires : util-linux
 
 %description
-The âfutile.optionsâ subsystem provides an easy user-defined options management
+The ’futile.options’ subsystem provides an easy user-defined options management
 system that is properly scoped. This means that options created via
-âfutile.optionsâ are fully self-contained and will not collide with options
+’futile.options’ are fully self-contained and will not collide with options
 defined in other packages. This package is a self-contained package within the
 futile suite of libraries.
 
@@ -26,13 +27,13 @@ futile suite of libraries.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552922654
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571834766
 
 %install
-export SOURCE_DATE_EPOCH=1552922654
+export SOURCE_DATE_EPOCH=1571834766
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -61,12 +62,12 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  futile.options || :
+R CMD check --no-manual --no-examples --no-codoc futile.options || :
 
 
 %files
